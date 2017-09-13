@@ -28,7 +28,10 @@ int main() {
     std::cout << "connect to " << ipc_name << std::endl;
     std::cout << "ZMQ_SNDHWM: " << sndhwm << std::endl;
 
-    zmq_pollitem_t item { (void *)&dealer, 0, ZMQ_POLLOUT, 0};
+    // yes, zmq::socket_t has overload operator void*
+    zmq_pollitem_t item { (void *)dealer, 0, ZMQ_POLLOUT, 0};
+
+
     std::cout << "now,  using zmq_poll to detect ZMQ_POLLOUT event to fill up send queue" << std::endl;
 
     std::atomic<int> ever_timeout(0);

@@ -56,7 +56,8 @@ int main() {
 
     // Given a ZMQ socket already in `mute status` due to having reached high water mark,
     // test if this socket won't wake up zmq_poll of its ZMQ_POLLOUT event
-    zmq_pollitem_t item { (void *)&dealer, 0, ZMQ_POLLOUT, 0};
+    // yes, zmq::socket_t has overload operator void*
+    zmq_pollitem_t item { (void *)dealer, 0, ZMQ_POLLOUT, 0};
     std::cout << "now, give it 5 seconds to allow the event loop be signaled by ZMQ_POLLOUT event..." << std::endl;
     int count = zmq::poll(&item, 1, 5000);
     if (count <= 0) {
