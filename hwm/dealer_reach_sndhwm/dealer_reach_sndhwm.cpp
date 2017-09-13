@@ -4,6 +4,8 @@
 
 #include <zmq.hpp>
 #include <iostream>
+#include <sys/types.h>
+#include <unistd.h>
 
 int main() {
     const int sndhwm = 1000;
@@ -17,7 +19,10 @@ int main() {
     dealer.setsockopt(ZMQ_LINGER, 0);
 
 
-    dealer.connect("ipc://dealer_reach_sndhwm");
+    pid_t pid = getpid();
+    std::string ipc_name = "ipc://dealer_reach_sndhwm";
+    ipc_name.append(std::to_string(static_cast<unsigned int>(pid)));
+    dealer.connect(ipc_name);
 
     std::cout << "ZMQ_SNDHWM: " << sndhwm << std::endl;
 

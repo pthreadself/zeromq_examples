@@ -1,3 +1,6 @@
-SET(SRC_FILES dealer_reach_sndhwm.cpp)
-add_executable(dealer_reach_sndhwm ${SRC_FILES})
+SET(SRC_DEALER_REACH_SNDHWM_FILES dealer_reach_sndhwm.cpp)
+SET(SRC_DEALER_FILLUP_SNDHWM dealer_fillup_send_queue.cpp)
+add_executable(dealer_reach_sndhwm ${SRC_DEALER_REACH_SNDHWM_FILES})
+add_executable(dealer_fillup_sndhwm ${SRC_DEALER_FILLUP_SNDHWM})
 target_link_libraries(dealer_reach_sndhwm zmq)
+target_link_libraries(dealer_fillup_sndhwm zmq)
