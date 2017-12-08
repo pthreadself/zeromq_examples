@@ -7,8 +7,6 @@
 #include <event2/event.h>
 #include <zmq.hpp>
 
-
-
 void business_logic(evutil_socket_t fd, short flags, void * context) {
     printf("Got an event on socket %d:%s%s%s%s\n",
            fd,
